@@ -1,4 +1,5 @@
 #include "io.h"
+#include "serial.h"
 
 /* I/O ports */
 #define FB_COMMAND_PORT 0x3d4
@@ -26,10 +27,10 @@ void fb_move_cursor(unsigned short pos) {
  * Writes a character with the given foreground and background to position i
  * in the framebuffer.
  *
- * @param i location in the framebuffer
- * @param c character
- * @param fg foreground color
- * @param bg background color
+ * @param i   location in the framebuffer
+ * @param c   character
+ * @param fg  foreground color
+ * @param bg  background color
  */
 void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg) {
   frame_buffer[i] = c;
@@ -53,5 +54,7 @@ int kmain() {
   fb_write_cell(6, 0x6c, 2, 0);
   fb_write_cell(8, 0x6f, 2, 0);
   fb_move_cursor(13);
+  serial_configure_baud_rate(SERIAL_COM1_BASE, 4);
+  serial_configure_line(SERIAL_COM1_BASE);
   return 0xdeadface;
 }
