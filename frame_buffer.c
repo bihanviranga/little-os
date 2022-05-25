@@ -31,12 +31,16 @@ void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg) {
 }
 
 /**
- * The driver interface.
- * FIXME - this does not work.
+ * Writes to the framebuffer.
+ *
+ * @param start     points to the start of the content to be written
+ * @param location  location on the framebuffer to start writing
+ * @param len       length of the content to be written
  */
-int fb_write(char* buf, unsigned int len) {
+void fb_write(char* start, unsigned int location, unsigned int len) {
+  unsigned int fb_location = location;
   for (unsigned int i = 0; i < len; i++) {
-    fb_write_cell(i, buf[i], 7, 0);
+    fb_write_cell(fb_location, start[i], 7, 0);
+    fb_location += 2;
   }
-  return 0;
 }
