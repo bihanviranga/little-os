@@ -8,7 +8,12 @@ KERNEL_STACK_SIZE equ 4096      ; size of stack in bytes
 
 extern kmain
 
-section .text:    ; text (code) section
+section .bss
+align 4                   ; align to 4 bytes
+kernel_stack:             ; label pointing to the beginning of memory
+  resb KERNEL_STACK_SIZE  ; reserve for kernel stack
+
+section .text     ; text (code) section
 align 4           ; align code to 4 bytes
   dd MAGIC_NUMBER ; (D)efine (D)oubleword (allocate 4 bytes)
   dd FLAGS
@@ -23,8 +28,3 @@ loader:                                     ; loader label which is the entry po
 
 .loop:
   jmp .loop ; infinite loop
-
-section .bss:
-align 4                   ; align to 4 bytes
-kernel_stack:             ; label pointing to the beginning of memory
-  resb KERNEL_STACK_SIZE  ; reserve for kernel stack
