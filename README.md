@@ -9,13 +9,13 @@ Requires:
 
 Running:
 
-Compile, generate the ISO, and run with bochs:
+* Compile, generate the ISO, and run with bochs:
 `make run`
 
-Compile and generate the ISO:
+* Compile and generate the ISO:
 `make os.iso`
 
-Compile the kernel:
+* Compile the kernel:
 `make kernel.elf`
 
-There's also a `make clean` to delete compiled files.
+* There's also a `make clean` to delete compiled files.
