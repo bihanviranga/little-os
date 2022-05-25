@@ -1,21 +1,21 @@
-# Mini OS
+little-os
 
-Instructions:
+Requires:
 
-* Compile the code:
-`nasm -f elf32 loader.s`
+* nasm
+* bochs
+* genisoimage (in Arch this is in the `cdrkit` package)
+* gcc
 
-* Link the executable
-`ld -T link.ld -melf_i386 loader.o -o kernel.elf`
+Running:
 
-* Copy the `kernel.elf` file to `iso/boot`
-`cp kernel.elf iso/boot/kernel.elf`
+Compile, generate the ISO, and run with bochs:
+`make run`
 
-* Generate the ISO
-```bash
-chmod u+x generate_iso.sh
-./generate_iso
-```
+Compile and generate the ISO:
+`make os.iso`
 
-* Run with bochs
-`bochs -f bochsrc -q`
+Compile the kernel:
+`make kernel.elf`
+
+There's also a `make clean` to delete compiled files.
